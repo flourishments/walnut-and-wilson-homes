@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+<link rel="icon" type="image/png" href="logo.png">
+<script src="https://cdn.tailwindcss.com"></script>
+<script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+::-webkit-scrollbar { display: none;}
+body { font-family: 'Inter', sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
+#header {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#header.header-hidden {
+  transform: translateY(-100%);
+}
+.gallery-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+.gallery-image:hover {
+  transform: scale(1.03);
+}
+.gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+  padding: 1.5rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.gallery-image:hover .gallery-overlay {
+  transform: translateY(0);
+}
+.horizontal-gallery {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-behavior: smooth;
+}
+.horizontal-gallery::-webkit-scrollbar { display: none; }
+.horizontal-gallery img {
+  min-width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease;
+}
+.horizontal-gallery img:hover {
+  transform: scale(1.05);
+}
+.project-item {
+  position: relative;
+  flex: 0 0 auto;
+}
+.project-thumb {
+  width: 220px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 6px 14px -6px rgba(15, 23, 42, 0.35);
+}
+.project-item:hover .project-thumb {
+  transform: scale(1.05);
+}
+.dropzone-active {
+  border-color: #F97316;
+  background: rgba(249, 115, 22, 0.06);
+}
+.mobile-menu {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+.mobile-menu.open {
+  max-height: 360px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.file-list {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: #334155;
+}
+.file-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.testimonials-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  position: relative;
+}
+.testimonials-container::-webkit-scrollbar { display: none; }
+.testimonial-card {
+  flex: 0 0 320px;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.testimonial-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+/* New styles for image enlargement */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+.image-modal-content {
+  max-width: 95%;
+  max-height: 95%;
+  position: relative;
+}
+.modal-image {
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+}
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10000;
+}
+.modal-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+.modal-nav:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+.modal-prev {
+  left: 2rem;
+}
+.modal-next {
+  right: 2rem;
+}
+/* Hover enlargement for desktop */
+.horizontal-gallery img:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  #hero {
+    padding-top: 10rem;
+    min-height: 720px;
+  }
+  .horizontal-gallery img {
+    min-width: 180px;
+    height: 120px;
+  }
+  .project-thumb {
+    width: 180px;
+    height: 130px;
+  }
+  
+  .testimonial-card {
+    flex: 0 0 280px;
+  }
+  
+  .modal-image {
+    max-height: 85vh;
+  }
+  
+  .modal-close {
+    font-size: 2.5rem;
+    top: 1rem;
+    right: 1rem;
+  }
+  
+  .modal-nav {
+    font-size: 2rem;
+    width: 45px;
+    height: 45px;
+  }
+  
+  #header .flex-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  #header .space-x-4 {
+    margin-top: 1rem;
+  }
+  
+  .grid-cols-1\.5 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-thumb {
+    width: 240px;
+    height: 170px;
+  }
+}
+</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+'navy-charcoal': '#0F172A',
+'slate-med': '#334155',
+'off-white': '#F8FAFC',
+'warm-orange': '#F97316',
+'demo-gray': '#4B5563',
+},
+fontFamily: {
+'sans': ['Inter', 'sans-serif'],
+'heading': ['Montserrat', 'sans-serif'],
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-off-white">
+<header id="header" class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+<div class="max-w-screen-2xl mx-auto px-3 md:px-6 lg:px-10 py-2 md:py-3 flex items-center justify-between gap-2 md:gap-0 relative">
+<div class="flex items-center md:space-x-3">
+<img src="logo.png" alt="Walnut & Wilson Homes LLC logo" class="w-[120px] h-[120px] md:w-[98px] md:h-[98px] object-contain mt-0.5">
+<span class="hidden md:inline font-heading font-bold text-navy-charcoal text-xl whitespace-nowrap">Walnut & Wilson Homes LLC</span>
+</div>
+<div class="flex items-center justify-center flex-1 md:flex-none">
+<a href="#contact" class="inline-flex items-center justify-center bg-warm-orange text-white px-7 md:px-9 py-1.5 rounded-lg font-semibold text-sm md:text-base hover:bg-orange-600 transition">
+Get Quote
+</a>
+</div>
+<button id="mobile-menu-button" class="md:hidden ml-2 p-2 rounded-md text-navy-charcoal hover:text-warm-orange transition" aria-expanded="false" aria-controls="mobile-menu">
+<span class="block w-6 h-0.5 bg-navy-charcoal mb-1.5"></span>
+<span class="block w-6 h-0.5 bg-navy-charcoal mb-1.5"></span>
+<span class="block w-6 h-0.5 bg-navy-charcoal"></span>
+</button>
+<nav class="hidden md:flex items-center space-x-6 lg:space-x-8 whitespace-nowrap">
+<a href="#hero" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Home</a>
+<a href="#why-us" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Why Us</a>
+<a href="#gallery" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Gallery</a>
+<a href="#services" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Services</a>
+<a href="#licensed-trades" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Licensed</a>
+<a href="#contact" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Contact</a>
+</nav>
+<div class="hidden lg:flex items-center text-navy-charcoal hover:text-warm-orange font-semibold">
+<i class="fa-solid fa-phone mr-2"></i>(937) 396-4018
+</div>
+</div>
+<div id="mobile-menu" class="mobile-menu md:hidden bg-white border-t border-slate-200">
+<nav class="px-4 py-3 flex flex-col space-y-2">
+<a href="#hero" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Home</a>
+<a href="#why-us" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Why Us</a>
+<a href="#gallery" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Gallery</a>
+<a href="#services" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Services</a>
+<a href="#licensed-trades" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Licensed</a>
+<a href="#contact" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Contact</a>
+</nav>
+</div>
+</header>
+<section id="hero" class="relative pt-16 min-h-[700px] overflow-hidden">
+<div class="absolute inset-0">
+<img class="w-full h-full object-cover opacity-15" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7d2f0bec7e-58e5be3d9cab3f787f79.png" alt="modern home renovation interior construction site with tools and materials, grayscale muted tones, professional contractor workspace" />
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-8 h-full flex items-center">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+<div>
+<h1 class="font-heading font-bold text-navy-charcoal text-4xl md:text-5xl leading-tight mb-6">
+Home Repairs & Renovations Across Ohio
+</h1>
+<p class="text-navy-charcoal text-lg md:text-xl font-semibold mb-4">
+From Small Fixes to Full Remodels
+</p>
+<p class="text-slate-med text-base md:text-lg leading-relaxed mb-8">
+Serving Dayton and Cincinnati and the surrounding areas. Skilled work from a tight, experienced team—repairs, licensed trades, and remodels managed start-to-finish.
+</p>
+<div class="flex flex-wrap gap-4 mb-8">
+<a href="#contact" class="bg-warm-orange text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-bold text-base md:text-lg shadow-lg hover:bg-orange-600 transition w-full sm:w-auto">
+Request a Quote
+</a>
+<a href="tel:9373964018" class="bg-navy-charcoal text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-bold text-base md:text-lg shadow-lg hover:bg-slate-700 transition w-full sm:w-auto">
+<i class="fa-solid fa-phone mr-2"></i>Call/Text Now
+</a>
+</div>
+<div class="bg-white/95 backdrop-blur-sm rounded-lg p-4 md:p-5 shadow-md inline-block">
+<div class="flex items-start space-x-3 text-xs md:text-sm text-slate-med">
+<i class="fa-solid fa-circle-check text-warm-orange text-xl mt-0.5"></i>
+<p class="leading-relaxed">
+<span class="font-bold text-navy-charcoal text-sm md:text-base">Licensed • Insured</span><br>
+Lead manager with 20+ years residential & commercial experience
+</p>
+</div>
+</div>
+</div>
+<div class="hidden lg:block">
+<div class="bg-white/90 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-2xl">
+<h3 class="font-heading font-bold text-navy-charcoal text-xl md:text-2xl mb-4 md:mb-6">Quick Contact</h3>
+<div class="space-y-3 md:space-y-4">
+<div class="flex items-center space-x-4 p-3 md:p-4 bg-warm-orange/10 rounded-lg">
+<i class="fa-solid fa-phone text-warm-orange text-xl md:text-2xl"></i>
+<div>
+<p class="text-xs text-slate-med font-semibold">Call or Text</p>
+<p class="text-navy-charcoal font-bold text-lg md:text-xl">(937) 396-4018</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 p-3 md:p-4 bg-warm-orange/10 rounded-lg">
+<i class="fa-solid fa-envelope text-warm-orange text-xl md:text-2xl"></i>
+<div>
+<p class="text-xs text-slate-med font-semibold">Email Us</p>
+<p class="text-navy-charcoal font-bold text-sm md:text-base">walnutandwilsonhomes@gmail.com</p>
+</div>
+</div>
+<div class="flex items-center space-x-4 p-3 md:p-4 bg-warm-orange/10 rounded-lg">
+<i class="fa-solid fa-location-dot text-warm-orange text-xl md:text-2xl"></i>
+<div>
+<p class="text-xs text-slate-med font-semibold">Service Area</p>
+<p class="text-navy-charcoal font-bold">Dayton & Cincinnati + surrounding areas</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-us" class="bg-slate-med py-16 md:py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-white text-3xl md:text-4xl mb-4">Why Homeowners Choose Us</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-white/90 text-base md:text-lg">Trusted expertise and reliable service on every project</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+<div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:bg-white/10 transition">
+<div class="flex items-start space-x-3 md:space-x-4">
+<div class="flex-shrink-0 w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-users text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<h3 class="font-heading font-bold text-white text-lg md:text-xl mb-2">Small team, highly skilled</h3>
+<p class="text-white/80 text-sm md:text-base">Less runaround, more expertise on every job</p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:bg-white/10 transition">
+<div class="flex items-start space-x-3 md:space-x-4">
+<div class="flex-shrink-0 w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-magnifying-glass text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<h3 class="font-heading font-bold text-white text-lg md:text-xl mb-2">Diagnostics first</h3>
+<p class="text-white/80 text-sm md:text-base">Fix the cause, not just the symptom</p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:bg-white/10 transition">
+<div class="flex items-start space-x-3 md:space-x-4">
+<div class="flex-shrink-0 w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-broom text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<h3 class="font-heading font-bold text-white text-lg md:text-xl mb-2">Clean, respectful job sites</h3>
+<p class="text-white/80 text-sm md:text-base">Your home is treated with care throughout</p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:bg-white/10 transition">
+<div class="flex items-start space-x-3 md:space-x-4">
+<div class="flex-shrink-0 w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-calendar-check text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<h3 class="font-heading font-bold text-white text-lg md:text-xl mb-2">One point of contact</h3>
+<p class="text-white/80 text-sm md:text-base">Organized, reliable scheduling you can count on</p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:bg-white/10 transition">
+<div class="flex items-start space-x-3 md:space-x-4">
+<div class="flex-shrink-0 w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-clipboard-check text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<h3 class="font-heading font-bold text-white text-lg md:text-xl mb-2">Pre & post inspection repairs</h3>
+<p class="text-white/80 text-sm md:text-base">We handle inspection repairs efficiently</p>
+</div>
+</div>
+</div>
+<div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:bg-white/10 transition">
+<div class="flex items-start space-x-3 md:space-x-4">
+<div class="flex-shrink-0 w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-shield-halved text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<h3 class="font-heading font-bold text-white text-lg md:text-xl mb-2">Licensed & Insured</h3>
+<p class="text-white/80 text-sm md:text-base">Professional credentials and full protection</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="gallery" class="bg-off-white py-16 md:py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-navy-charcoal text-3xl md:text-4xl mb-4">Our Work</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-slate-med text-base md:text-lg">A showcase of our quality craftsmanship</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-12">
+<div class="gallery-image overflow-hidden rounded-xl shadow-lg">
+<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3fc4e03cc7-b6828707fa26e3fc20c4.png" alt="modern finished basement renovation with comfortable seating area" />
+<div class="gallery-overlay">
+<h3 class="font-heading font-bold text-white text-xl mb-1">Basement Transformation</h3>
+<p class="text-warm-orange font-semibold">Dayton, OH</p>
+<p class="text-white/90 text-sm">Complete basement renovation with custom lighting and entertainment space.</p>
+</div>
+</div>
+<div class="gallery-image overflow-hidden rounded-xl shadow-lg">
+<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/5b398f0fa3-fa512b00ceac18e519e4.png" alt="renovated modern kitchen with new cabinets and countertops" />
+<div class="gallery-overlay">
+<h3 class="font-heading font-bold text-white text-xl mb-1">Kitchen Remodel</h3>
+<p class="text-warm-orange font-semibold">Columbus, OH</p>
+<p class="text-white/90 text-sm">Full kitchen renovation with custom cabinetry and premium appliances.</p>
+</div>
+</div>
+<div class="gallery-image overflow-hidden rounded-xl shadow-lg">
+<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/36b4cb8346-12fcbbff64b47a6bf071.png" alt="renovated bathroom with new tile shower and modern fixtures" />
+<div class="gallery-overlay">
+<h3 class="font-heading font-bold text-white text-xl mb-1">Bathroom Rebuild</h3>
+<p class="text-warm-orange font-semibold">Cincinnati, OH</p>
+<p class="text-white/90 text-sm">Custom tile work and modern fixtures for a complete bathroom transformation.</p>
+</div>
+</div>
+<div class="gallery-image overflow-hidden rounded-xl shadow-lg">
+<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" src="trim-work.jpg" alt="custom trim and moulding installation in a renovated home" />
+<div class="gallery-overlay">
+<h3 class="font-heading font-bold text-white text-xl mb-1">Quality Trim Work</h3>
+<p class="text-warm-orange font-semibold">Springfield, OH</p>
+<p class="text-white/90 text-sm">Custom moulding and trim installation for a classic, elegant finish.</p>
+</div>
+</div>
+</div>
+<div class="mb-12">
+<h3 class="font-heading font-bold text-navy-charcoal text-xl md:text-2xl text-center mb-4 md:mb-6">More Projects</h3>
+<div class="horizontal-gallery px-4">
+<!-- New images for horizontal gallery -->
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0001.jpg" alt="Project photo 1" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0002.jpg" alt="Project photo 2" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0003.jpg" alt="Project photo 3" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0004.jpg" alt="Project photo 4" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0006.jpg" alt="Project photo 5" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0007.jpg" alt="Project photo 6" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0008.jpg" alt="Project photo 7" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0009.jpg" alt="Project photo 8" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0010.jpg" alt="Project photo 9" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0012.jpg" alt="Project photo 10" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0013.jpg" alt="Project photo 11" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0015.jpg" alt="Project photo 12" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0017.jpg" alt="Project photo 13" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0018.jpg" alt="Project photo 14" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0019.jpg" alt="Project photo 15" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0020.jpg" alt="Project photo 16" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0022.jpg" alt="Project photo 17" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0023.jpg" alt="Project photo 18" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0024.jpg" alt="Project photo 19" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0025.jpg" alt="Project photo 20" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0026.jpg" alt="Project photo 21" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0027.jpg" alt="Project photo 22" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0029.jpg" alt="Project photo 23" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0030.jpg" alt="Project photo 24" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0031.jpg" alt="Project photo 25" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0032.jpg" alt="Project photo 26" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0034.jpg" alt="Project photo 27" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0035.jpg" alt="Project photo 28" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0036.jpg" alt="Project photo 29" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0037.jpg" alt="Project photo 30" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0038.jpg" alt="Project photo 31" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0039.jpg" alt="Project photo 32" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0041.jpg" alt="Project photo 33" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0042.jpg" alt="Project photo 34" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0044.jpg" alt="Project photo 35" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0046.jpg" alt="Project photo 36" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0048.jpg" alt="Project photo 37" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0050.jpg" alt="Project photo 38" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0051.jpg" alt="Project photo 39" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0052.jpg" alt="Project photo 40" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0054.jpg" alt="Project photo 41" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0055.jpg" alt="Project photo 42" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0056.jpg" alt="Project photo 43" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0057.jpg" alt="Project photo 44" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0058.jpg" alt="Project photo 45" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0060.jpg" alt="Project photo 46" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0061.jpg" alt="Project photo 47" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0063.jpg" alt="Project photo 48" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0064.jpg" alt="Project photo 49" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0065.jpg" alt="Project photo 50" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0066.jpg" alt="Project photo 51" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0068.jpg" alt="Project photo 52" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0069.jpg" alt="Project photo 53" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0070.jpg" alt="Project photo 54" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0072.jpg" alt="Project photo 55" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0073.jpg" alt="Project photo 56" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0074.jpg" alt="Project photo 57" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0075.jpg" alt="Project photo 58" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0076.jpg" alt="Project photo 59" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0077.jpg" alt="Project photo 60" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0079.jpg" alt="Project photo 61" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0080.jpg" alt="Project photo 62" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0082.jpg" alt="Project photo 63" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0084.jpg" alt="Project photo 64" class="project-thumb project-image">
+  </div>
+  <div class="flex-shrink-0 project-item">
+    <img src="website-photos/IMG-20260116-WA0085.jpg" alt="Project photo 65" class="project-thumb project-image">
+  </div>
+</div>
+<div class="flex justify-center space-x-4 mt-4">
+<button class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
+<i class="fa-solid fa-arrow-left"></i>
+</button>
+<button class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
+<i class="fa-solid fa-arrow-right"></i>
+</button>
+</div>
+</div>
+<div class="bg-warm-orange/10 border border-warm-orange/30 rounded-xl p-4 md:p-6 max-w-2xl mx-auto">
+<p class="text-slate-med text-center italic text-base md:text-lg">
+<i class="fa-solid fa-camera text-warm-orange mr-2"></i>
+We take pride in every project, big or small. Ask us about our complete portfolio!
+</p>
+</div>
+</div>
+</section>
+<section id="services" class="bg-off-white py-16 md:py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-navy-charcoal text-3xl md:text-4xl mb-4">What We Do</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-slate-med text-base md:text-lg">Comprehensive services for all your home needs</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+<div id="service-repairs" class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-wrench text-warm-orange text-2xl"></i>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<h3 class="font-heading font-bold text-navy-charcoal text-xl">Repairs & Maintenance</h3>
+<span class="inline-block bg-warm-orange/10 text-warm-orange text-xs font-semibold px-2 py-1 rounded-full">Small Jobs Welcome</span>
+</div>
+<p class="text-slate-med leading-relaxed mb-4">
+We handle all types of repairs with care and professionalism.
+</p>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span class="font-bold">Appliance repair specialists:</span> Washers, dryers, ovens, microwaves, dishwashers, and more
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Water heater installation & repair</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Punch lists and inspection repairs</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>General home maintenance</span>
+</li>
+</ul>
+</div>
+<div id="service-demolition" class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-person-digging text-warm-orange text-2xl"></i>
+</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-xl mb-3">Demolition & Junk Removal</h3>
+<p class="text-slate-med leading-relaxed mb-4">
+Complete interior demolition and waste removal with our own equipment and vehicles.
+</p>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Interior demolition services</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Furniture and appliance removal</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Own dump trailers and sprinter vans</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Hauling services to local dumps</span>
+</li>
+</ul>
+</div>
+<div id="service-plumbing" class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-droplet text-warm-orange text-2xl"></i>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<h3 class="font-heading font-bold text-navy-charcoal text-xl">Plumbing</h3>
+<span class="inline-block bg-slate-100 text-slate-700 text-xs font-semibold px-2 py-1 rounded-full">Licensed</span>
+</div>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Leak detection and repair</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Drain cleaning and blockage removal</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Pipe rerouting and replacement</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Water, sewer, and gas plumbing</span>
+</li>
+</ul>
+</div>
+<div id="service-electrical" class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-bolt text-warm-orange text-2xl"></i>
+</div>
+<div class="flex items-center gap-2 mb-3">
+<h3 class="font-heading font-bold text-navy-charcoal text-xl">Electrical</h3>
+<span class="inline-block bg-slate-100 text-slate-700 text-xs font-semibold px-2 py-1 rounded-full">Licensed</span>
+</div>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Electrical diagnostics and troubleshooting</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Wiring repairs and upgrades</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>General electrical construction</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Panel upgrades and circuit work</span>
+</li>
+</ul>
+</div>
+<div id="service-carpentry" class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-hammer text-warm-orange text-2xl"></i>
+</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-xl mb-3">Carpentry & Finish Work</h3>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Custom cabinetry and built-ins</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Moulding and baseboards</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Trim installation and repair</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Framing and structural repairs</span>
+</li>
+</ul>
+</div>
+<div id="service-masonry" class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-cube text-warm-orange text-2xl"></i>
+</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-xl mb-3">Masonry / Brick / Stucco</h3>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Chimney repair and restoration</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Brick and block walls</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Stucco finishing and repairs</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Tuckpointing and repointing</span>
+</li>
+</ul>
+</div>
+<div id="service-concrete" class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-house-chimney text-warm-orange text-2xl"></i>
+</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-xl mb-3">Concrete & Exterior</h3>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Concrete walkways and driveways</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Patios and outdoor spaces</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Deck construction and repair</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Shed installation and repair</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Landscaping and hardscaping</span>
+</li>
+</ul>
+</div>
+<div id="service-painting" class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-paint-roller text-warm-orange text-2xl"></i>
+</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-xl mb-3">Painting / Drywall</h3>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Interior and exterior painting</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Drywall installation and repair</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Flooring installation (all types)</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Texture and finish work</span>
+</li>
+</ul>
+</div>
+<div id="service-remodeling" class="bg-white rounded-xl border-2 border-warm-orange shadow-sm hover:shadow-lg transition p-6 md:p-7">
+<div class="w-14 h-14 bg-warm-orange/10 rounded-lg flex items-center justify-center mb-5">
+<i class="fa-solid fa-house-circle-check text-warm-orange text-2xl"></i>
+</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-xl mb-3">Remodeling + Project Management</h3>
+<p class="text-slate-med leading-relaxed mb-4 font-semibold">
+Full-service remodeling and general contracting for projects of any size
+</p>
+<ul class="space-y-2 text-sm md:text-base text-slate-med">
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Bathroom remodels</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Kitchen renovations</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Basement finishing</span>
+</li>
+<li class="flex items-start">
+<i class="fa-solid fa-check text-warm-orange mr-2 md:mr-3 mt-1"></i>
+<span>Whole-house remodels</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="mt-10 md:mt-12 bg-warm-orange/10 border-l-4 border-warm-orange rounded-lg p-4 md:p-6 max-w-2xl mx-auto">
+<p class="text-slate-med text-center italic text-base md:text-lg">
+<i class="fa-solid fa-star text-warm-orange mr-2"></i>
+<span class="font-bold text-navy-charcoal">Small jobs welcome!</span> No project is too small for our team.<br>
+If you don't see it listed or aren't sure, just ask — we handle most jobs.
+</p>
+</div>
+</div>
+</section>
+<section id="licensed-trades" class="bg-navy-charcoal py-16 md:py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-white text-3xl md:text-4xl mb-4">Licensed Trades</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-white/90 text-base md:text-lg">Fully licensed and insured for your peace of mind</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 max-w-5xl mx-auto">
+<div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/20 hover:bg-white/15 transition">
+<div class="flex items-start space-x-3 md:space-x-5 mb-4 md:mb-6">
+<div class="flex-shrink-0 w-14 h-14 md:w-16 h-16 bg-warm-orange rounded-lg flex items-center justify-center">
+<i class="fa-solid fa-droplet text-white text-2xl md:text-3xl"></i>
+</div>
+<div>
+<h3 class="font-heading font-bold text-white text-xl md:text-2xl mb-2 md:mb-3">Plumbing License</h3>
+<p class="text-white/90 leading-relaxed text-sm md:text-base">Fully licensed for all water, sewer, and gas plumbing needs. From simple repairs to complex installations, we handle it all with expertise and compliance.</p>
+</div>
+</div>
+<div class="bg-white/5 rounded-lg p-3 md:p-4">
+<ul class="space-y-2 text-white/80 text-xs md:text-sm">
+<li class="flex items-center">
+<i class="fa-solid fa-certificate text-warm-orange mr-2 md:mr-3"></i>
+<span>State-certified plumbing contractor</span>
+</li>
+<li class="flex items-center">
+<i class="fa-solid fa-certificate text-warm-orange mr-2 md:mr-3"></i>
+<span>Water & sewer line specialist</span>
+</li>
+<li class="flex items-center">
+<i class="fa-solid fa-certificate text-warm-orange mr-2 md:mr-3"></i>
+<span>Gas line installation & repair</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/20 hover:bg-white/15 transition">
+<div class="flex items-start space-x-3 md:space-x-5 mb-4 md:mb-6">
+<div class="flex-shrink-0 w-14 h-14 md:w-16 h-16 bg-warm-orange rounded-lg flex items-center justify-center">
+<i class="fa-solid fa-bolt text-white text-2xl md:text-3xl"></i>
+</div>
+<div>
+<h3 class="font-heading font-bold text-white text-xl md:text-2xl mb-2 md:mb-3">Electrician License</h3>
+<p class="text-white/90 leading-relaxed text-sm md:text-base">Licensed for electrical diagnostics, repair, and general electrical construction. Safe, code-compliant work on every project.</p>
+</div>
+</div>
+<div class="bg-white/5 rounded-lg p-3 md:p-4">
+<ul class="space-y-2 text-white/80 text-xs md:text-sm">
+<li class="flex items-center">
+<i class="fa-solid fa-certificate text-warm-orange mr-2 md:mr-3"></i>
+<span>State-licensed electrical contractor</span>
+</li>
+<li class="flex items-center">
+<i class="fa-solid fa-certificate text-warm-orange mr-2 md:mr-3"></i>
+<span>Residential & commercial wiring</span>
+</li>
+<li class="flex items-center">
+<i class="fa-solid fa-certificate text-warm-orange mr-2 md:mr-3"></i>
+<span>Panel upgrades & troubleshooting</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="mt-8 md:mt-10 bg-white/5 rounded-xl p-4 md:p-6 border border-warm-orange/30 max-w-2xl mx-auto">
+<p class="text-white/90 text-center text-base md:text-lg">
+<i class="fa-solid fa-file-lines text-warm-orange mr-2"></i>
+License details and proof of insurance available upon request
+</p>
+</div>
+</div>
+</section>
+<section id="remodeling" class="bg-slate-med py-16 md:py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-white text-3xl md:text-4xl mb-4">Remodeling Projects, Done Right</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-white/90 text-base md:text-lg">
+Bathrooms, kitchens, basements, and whole-house renovations. We handle every step from design to completion.
+</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 items-start">
+<div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+<h3 class="font-heading font-bold text-navy-charcoal text-xl md:text-2xl mb-4 md:mb-6">Our Remodeling Process</h3>
+<div class="space-y-4 md:space-y-6">
+<div class="flex items-start space-x-3 md:space-x-5">
+<div class="flex-shrink-0 w-10 h-10 md:w-12 h-12 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-lg">1</div>
+<div class="flex-1">
+<h4 class="font-semibold text-navy-charcoal text-base md:text-lg mb-1">Initial Consultation</h4>
+<p class="text-slate-med text-xs md:text-sm">We discuss your vision, needs, and budget</p>
+</div>
+</div>
+<div class="ml-6 md:ml-8 border-l-2 border-warm-orange/30 h-6 md:h-8"></div>
+<div class="flex items-start space-x-3 md:space-x-5">
+<div class="flex-shrink-0 w-10 h-10 md:w-12 h-12 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-lg">2</div>
+<div class="flex-1">
+<h4 class="font-semibold text-navy-charcoal text-base md:text-lg mb-1">Design & Planning</h4>
+<p class="text-slate-med text-xs md:text-sm">Detailed plans, material selection, and timeline</p>
+</div>
+</div>
+<div class="ml-6 md:ml-8 border-l-2 border-warm-orange/30 h-6 md:h-8"></div>
+<div class="flex items-start space-x-3 md:space-x-5">
+<div class="flex-shrink-0 w-10 h-10 md:w-12 h-12 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-lg">3</div>
+<div class="flex-1">
+<h4 class="font-semibold text-navy-charcoal text-base md:text-lg mb-1">Skilled Execution</h4>
+<p class="text-slate-med text-xs md:text-sm">Expert craftsmen bring your project to life</p>
+</div>
+</div>
+<div class="ml-6 md:ml-8 border-l-2 border-warm-orange/30 h-6 md:h-8"></div>
+<div class="flex items-start space-x-3 md:space-x-5">
+<div class="flex-shrink-0 w-10 h-10 md:w-12 h-12 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-lg">4</div>
+<div class="flex-1">
+<h4 class="font-semibold text-navy-charcoal text-base md:text-lg mb-1">Quality Completion</h4>
+<p class="text-slate-med text-xs md:text-sm">Final walkthrough and your satisfaction guaranteed</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 md:gap-5">
+<div class="bg-white rounded-xl p-4 md:p-6 text-center shadow-lg hover:shadow-xl transition">
+<div class="w-14 h-14 md:w-16 h-16 bg-warm-orange/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+<i class="fa-solid fa-bath text-warm-orange text-2xl md:text-3xl"></i>
+</div>
+<h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-1 md:mb-2">Bathrooms</h4>
+<p class="text-slate-med text-xs md:text-sm">Full renovations</p>
+</div>
+<div class="bg-white rounded-xl p-4 md:p-6 text-center shadow-lg hover:shadow-xl transition">
+<div class="w-14 h-14 md:w-16 h-16 bg-warm-orange/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+<i class="fa-solid fa-kitchen-set text-warm-orange text-2xl md:text-3xl"></i>
+</div>
+<h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-1 md:mb-2">Kitchens</h4>
+<p class="text-slate-med text-xs md:text-sm">Modern upgrades</p>
+</div>
+<div class="bg-white rounded-xl p-4 md:p-6 text-center shadow-lg hover:shadow-xl transition">
+<div class="w-14 h-14 md:w-16 h-16 bg-warm-orange/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+<i class="fa-solid fa-stairs text-warm-orange text-2xl md:text-3xl"></i>
+</div>
+<h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-1 md:mb-2">Basements</h4>
+<p class="text-slate-med text-xs md:text-sm">Complete finishing</p>
+</div>
+<div class="bg-white rounded-xl p-4 md:p-6 text-center shadow-lg hover:shadow-xl transition">
+<div class="w-14 h-14 md:w-16 h-16 bg-warm-orange/10 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+<i class="fa-solid fa-house text-warm-orange text-2xl md:text-3xl"></i>
+</div>
+<h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-1 md:mb-2">Whole House</h4>
+<p class="text-slate-med text-xs md:text-sm">Full remodels</p>
+</div>
+</div>
+</div>
+<div class="mt-8 md:mt-10 bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-white/20 max-w-3xl mx-auto">
+<p class="text-white/90 text-center text-base md:text-lg leading-relaxed">
+<i class="fa-solid fa-lightbulb text-warm-orange mr-2"></i>
+From concept to completion, we manage every detail so you don't have to
+</p>
+</div>
+</div>
+</section>
+<section id="process" class="bg-white py-16 md:py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-navy-charcoal text-3xl md:text-4xl mb-4">Our Process</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-slate-med text-base md:text-lg">Simple, transparent steps from start to finish</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-2 md:gap-6">
+<div class="bg-gradient-to-br from-warm-orange/5 to-warm-orange/10 rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:shadow-lg transition">
+<div class="flex flex-col items-center text-center">
+<div class="w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-xl mb-3 md:mb-4">1</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-2 md:mb-3">Share Details</h3>
+<p class="text-slate-med text-xs md:text-sm leading-relaxed mb-2 md:mb-3">
+Tell us about your project through our contact form, email, or phone.
+</p>
+<div class="flex items-center space-x-1 md:space-x-2 text-xs">
+<i class="fa-solid fa-phone text-warm-orange"></i>
+<i class="fa-solid fa-envelope text-warm-orange"></i>
+<i class="fa-solid fa-images text-warm-orange"></i>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-warm-orange/5 to-warm-orange/10 rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:shadow-lg transition">
+<div class="flex flex-col items-center text-center">
+<div class="w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-xl mb-3 md:mb-4">2</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-2 md:mb-3">Assessment</h3>
+<p class="text-slate-med text-xs md:text-sm leading-relaxed mb-2 md:mb-3">
+We'll visit your property to evaluate the project scope and discuss options.
+</p>
+<div class="bg-white rounded px-1 md:px-2 py-0.5 md:py-1 text-xs text-slate-med">
+<i class="fa-solid fa-info-circle text-warm-orange mr-1"></i>
+If needed
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-warm-orange/5 to-warm-orange/10 rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:shadow-lg transition">
+<div class="flex flex-col items-center text-center">
+<div class="w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-xl mb-3 md:mb-4">3</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-2 md:mb-3">Clear Estimate</h3>
+<p class="text-slate-med text-xs md:text-sm leading-relaxed mb-2 md:mb-3">
+Detailed breakdown of work, materials, timeline, and costs.
+</p>
+<div class="flex gap-1 md:gap-2 text-xs">
+<span class="bg-white px-1 md:px-2 py-0.5 md:py-1 rounded text-slate-med">
+<i class="fa-solid fa-file-invoice text-warm-orange"></i>
+</span>
+<span class="bg-white px-1 md:px-2 py-0.5 md:py-1 rounded text-slate-med">
+<i class="fa-solid fa-clock text-warm-orange"></i>
+</span>
+<span class="bg-white px-1 md:px-2 py-0.5 md:py-1 rounded text-slate-med">
+<i class="fa-solid fa-dollar-sign text-warm-orange"></i>
+</span>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-warm-orange/5 to-warm-orange/10 rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:shadow-lg transition">
+<div class="flex flex-col items-center text-center">
+<div class="w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-xl mb-3 md:mb-4">4</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-2 md:mb-3">Execution</h3>
+<p class="text-slate-med text-xs md:text-sm leading-relaxed mb-2 md:mb-3">
+Our skilled team arrives on time and works efficiently.
+</p>
+<div class="flex flex-wrap gap-1 text-xs justify-center">
+<span class="bg-white px-1 md:px-2 py-0.5 md:py-1 rounded text-slate-med">
+<i class="fa-solid fa-check text-warm-orange mr-1"></i>On-time
+</span>
+<span class="bg-white px-1 md:px-2 py-0.5 md:py-1 rounded text-slate-med">
+<i class="fa-solid fa-check text-warm-orange mr-1"></i>Clean
+</span>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-warm-orange/5 to-warm-orange/10 rounded-xl p-4 md:p-6 border-l-4 border-warm-orange hover:shadow-lg transition">
+<div class="flex flex-col items-center text-center">
+<div class="w-12 h-12 md:w-14 h-14 bg-warm-orange rounded-full flex items-center justify-center text-white font-bold text-base md:text-xl mb-3 md:mb-4">5</div>
+<h3 class="font-heading font-bold text-navy-charcoal text-base md:text-lg mb-2 md:mb-3">Walkthrough</h3>
+<p class="text-slate-med text-xs md:text-sm leading-relaxed mb-2 md:mb-3">
+Final inspection to ensure you're completely satisfied.
+</p>
+<div class="bg-warm-orange/20 rounded px-2 md:px-3 py-1 md:py-2 text-center">
+<i class="fa-solid fa-star text-warm-orange text-base md:text-lg"></i>
+<p class="text-navy-charcoal text-xs font-semibold mt-1">Your satisfaction</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 md:mt-12 bg-navy-charcoal rounded-xl p-6 md:p-8 text-center max-w-xl mx-auto">
+<i class="fa-solid fa-clock text-warm-orange text-3xl md:text-4xl mb-3 md:mb-4"></i>
+<p class="text-white text-lg md:text-xl font-bold mb-2">Quick Response Time</p>
+<p class="text-white/80 text-sm md:text-base">Typical reply within 1 business day</p>
+</div>
+</div>
+</section>
+<section id="testimonials" class="bg-slate-med py-16 md:py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-white text-3xl md:text-4xl mb-4">What Our Clients Say</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-white/90 text-base md:text-lg">Real feedback from real homeowners</p>
+</div>
+<div class="testimonials-container">
+<div class="testimonial-card">
+<div class="flex items-center space-x-3 md:space-x-4 mb-3 md:mb-4">
+<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover">
+<div>
+<h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg">Sarah M.</h4>
+<p class="text-slate-med text-xs md:text-sm">Dayton, OH</p>
+</div>
+</div>
+<div class="flex text-warm-orange text-base md:text-lg mb-3 md:mb-4">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</div>
+<p class="text-slate-med leading-relaxed italic text-xs md:text-sm">
+"Excellent work on our bathroom remodel! They were professional, on time, and the quality exceeded our expectations. Highly recommend!"
+</p>
+</div>
+<div class="testimonial-card">
+<div class="flex items-center space-x-3 md:space-x-4 mb-3 md:mb-4">
+<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover">
+<div>
+<h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg">Mike R.</h4>
+<p class="text-slate-med text-xs md:text-sm">Cincinnati, OH</p>
+</div>
+</div>
+<div class="flex text-warm-orange text-base md:text-lg mb-3 md:mb-4">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</div>
+<p class="text-slate-med leading-relaxed italic text-xs md:text-sm">
+"Had a plumbing emergency and they responded quickly. Fixed the issue and explained everything clearly. Great service!"
+</p>
+</div>
+<div class="testimonial-card">
+<div class="flex items-center space-x-3 md:space-x-4 mb-3 md:mb-4">
+<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover">
+<div>
+<h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg">Jennifer L.</h4>
+<p class="text-slate-med text-xs md:text-sm">Columbus, OH</p>
+</div>
+</div>
+<div class="flex text-warm-orange text-base md:text-lg mb-3 md:mb-4">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+</div>
+<p class="text-slate-med leading-relaxed italic text-xs md:text-sm">
+"Our kitchen looks amazing! The team was respectful, clean, and the project manager kept us informed every step of the way."
+</p>
+</div>
+<div class="testimonial-card bg-white/10 border border-dashed border-white/30">
+<div class="h-full flex flex-col items-center justify-center text-center p-4 md:p-6">
+<i class="fa-solid fa-quote-left text-warm-orange text-4xl opacity-25 mb-3 md:mb-4"></i>
+<p class="text-white text-base md:text-xl font-bold mb-2">More testimonials coming soon!</p>
+<p class="text-white/70 text-sm md:text-base">We're constantly adding new client feedback</p>
+</div>
+</div>
+<div class="testimonial-card bg-white/10 border border-dashed border-white/30">
+<div class="h-full flex flex-col items-center justify-center text-center p-4 md:p-6">
+<i class="fa-solid fa-quote-left text-warm-orange text-4xl opacity-25 mb-3 md:mb-4"></i>
+<p class="text-white text-base md:text-xl font-bold mb-2">Have we worked together?</p>
+<p class="text-white/70 text-sm md:text-base">Share your experience with us!</p>
+</div>
+</div>
+</div>
+<div class="flex justify-center space-x-4 mt-6 md:mt-8">
+<button class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
+<i class="fa-solid fa-arrow-left"></i>
+</button>
+<button class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
+<i class="fa-solid fa-arrow-right"></i>
+</button>
+</div>
+</div>
+</section>
+<section id="contact" class="bg-off-white py-16 md:py-20">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-navy-charcoal text-3xl md:text-4xl mb-4">Let's Talk About Your Project</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-slate-med text-base md:text-lg">From quick fixes to full renovations, we'd love to help. Get in touch today!</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8 mb-10 md:mb-12">
+<a href="tel:9373964018" class="flex items-center space-x-3 md:space-x-5 bg-white rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex-shrink-0 w-14 h-14 md:w-16 h-16 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-phone text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<p class="text-xs md:text-sm text-slate-med font-semibold mb-1">Call or Text</p>
+<p class="text-navy-charcoal font-heading font-bold text-base md:text-2xl">(937) 396-4018</p>
+</div>
+</a>
+<a href="mailto:walnutandwilsonhomes@gmail.com" class="flex items-center space-x-3 md:space-x-5 bg-white rounded-xl p-4 md:p-6 shadow-lg hover:shadow-xl transition">
+<div class="flex-shrink-0 w-14 h-14 md:w-16 h-16 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-envelope text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<p class="text-xs md:text-sm text-slate-med font-semibold mb-1">Email Us</p>
+<p class="text-navy-charcoal font-heading font-bold text-sm md:text-lg break-all">walnutandwilsonhomes@gmail.com</p>
+</div>
+</a>
+<div class="flex items-center space-x-3 md:space-x-5 bg-white rounded-xl p-4 md:p-6 shadow-lg">
+<div class="flex-shrink-0 w-14 h-14 md:w-16 h-16 bg-warm-orange rounded-full flex items-center justify-center">
+<i class="fa-solid fa-location-dot text-white text-xl md:text-2xl"></i>
+</div>
+<div>
+<p class="text-xs md:text-sm text-slate-med font-semibold mb-1">Service Area</p>
+<p class="text-navy-charcoal font-heading font-bold text-base md:text-xl">Dayton & Cincinnati + surrounding areas</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
+<div class="bg-white rounded-xl shadow-2xl p-6 md:p-8">
+<h3 class="font-heading font-bold text-navy-charcoal text-xl md:text-2xl mb-4 text-center">Request a Quote</h3>
+<form class="space-y-4" action="https://formsubmit.co/walnutandwilsonhomes@gmail.com" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="_subject" value="New Quote Request - Walnut & Wilson Homes">
+<input type="hidden" name="_template" value="table">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
+<div>
+<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Name *</label>
+<input type="text" name="name" placeholder="Your full name" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+</div>
+<div>
+<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Phone *</label>
+<input type="tel" name="phone" placeholder="(555) 555-5555" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+</div>
+</div>
+<div>
+<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Email *</label>
+<input type="email" name="email" placeholder="your@email.com" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+</div>
+<div>
+<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">City / Zip Code *</label>
+<input type="text" name="location" placeholder="e.g., Dayton, OH 45402" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+</div>
+<div>
+<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Project Type *</label>
+<select name="project-type" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+<option value="">Select project type</option>
+<option>Repair / Small Job</option>
+<option>Plumbing</option>
+<option>Electrical</option>
+<option>Carpentry</option>
+<option>Masonry</option>
+<option>Bathroom Remodel</option>
+<option>Kitchen Remodel</option>
+<option>Basement Finishing</option>
+<option>Whole House Remodel</option>
+<option>Demolition & Junk Removal</option>
+<option>Other</option>
+</select>
+</div>
+<div>
+<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Project Description *</label>
+<textarea name="project-description" rows="3" placeholder="Tell us about your project..." required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange resize-none transition text-xs md:text-sm"></textarea>
+</div>
+<div>
+<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Upload Photos (Optional)</label>
+<label for="project-photos" id="project-dropzone" class="border-2 border-dashed border-slate-med/30 rounded-lg p-4 md:p-6 text-center hover:border-warm-orange transition block cursor-pointer">
+<i class="fa-solid fa-cloud-arrow-up text-warm-orange text-3xl md:text-4xl mb-2"></i>
+<p class="text-slate-med text-xs md:text-sm mb-1">Click to upload or drag and drop</p>
+<p class="text-xs text-slate-med/70">PNG, JPG up to 10MB</p>
+</label>
+<input id="project-photos" type="file" name="attachment" accept="image/*" multiple class="sr-only">
+<ul id="file-list" class="file-list"></ul>
+</div>
+<div>
+<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Preferred Timeline</label>
+<select name="timeline" class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+<option value="">Select timeline</option>
+<option>As soon as possible</option>
+<option>Within 2 weeks</option>
+<option>Within 1 month</option>
+<option>Within 3 months</option>
+<option>Flexible / Planning ahead</option>
+</select>
+</div>
+<button type="submit" class="w-full bg-warm-orange text-white font-heading font-bold py-2 md:py-4 rounded-lg shadow-lg text-sm md:text-lg hover:bg-orange-600 transition">
+Submit Request
+<i class="fa-solid fa-arrow-right ml-1 md:ml-2"></i>
+</button>
+<p class="text-xs text-slate-med text-center mt-2">
+We'll respond within 1 business day
+</p>
+</form>
+</div>
+<div class="space-y-4 md:space-y-6">
+<div class="bg-navy-charcoal rounded-xl p-4 md:p-8 text-center">
+<p class="text-white font-bold text-base md:text-xl mb-2 md:mb-4">Prefer to call?</p>
+<a href="tel:9373964018" class="inline-block bg-warm-orange text-white font-heading font-bold px-4 md:px-8 py-2 md:py-4 rounded-lg text-base md:text-xl hover:bg-orange-600 transition">
+<i class="fa-solid fa-phone mr-1 md:mr-2"></i>(937) 396-4018
+</a>
+</div>
+<div class="bg-slate-med rounded-xl p-4 md:p-8">
+<h4 class="font-heading font-bold text-white text-base md:text-xl mb-2 md:mb-4">Service Areas</h4>
+<div class="space-y-2 md:space-y-3">
+<div class="flex items-center space-x-2 md:space-x-3 text-white/90">
+<i class="fa-solid fa-location-dot text-warm-orange text-lg md:text-xl"></i>
+<span class="font-semibold text-xs md:text-base">Dayton - Full service area</span>
+</div>
+<div class="flex items-center space-x-2 md:space-x-3 text-white/90">
+<i class="fa-solid fa-location-dot text-warm-orange text-lg md:text-xl"></i>
+<span class="font-semibold text-xs md:text-base">Cincinnati - Full service area</span>
+</div>
+<div class="flex items-center space-x-2 md:space-x-3 text-white/90">
+<i class="fa-solid fa-location-dot text-warm-orange text-lg md:text-xl"></i>
+<span class="font-semibold text-xs md:text-base">Surrounding areas - Contact us</span>
+</div>
+<div class="flex items-center space-x-2 md:space-x-3 text-white/90">
+<i class="fa-solid fa-map text-warm-orange text-lg md:text-xl"></i>
+<span class="font-semibold text-xs md:text-base">Nearby areas - Contact us</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer id="footer" class="bg-navy-charcoal py-8 md:py-12">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 mb-6 md:mb-8">
+<div class="md:col-span-2">
+<div class="flex items-center space-x-2 md:space-x-3 mb-3 md:mb-4">
+<img src="logo.png" alt="Walnut & Wilson Homes LLC logo" class="w-[98px] h-[98px] md:w-[113px] md:h-[113px] object-contain rounded-lg border border-white/40 p-1">
+<span class="font-heading font-bold text-white text-xl md:text-2xl">Walnut & Wilson Homes LLC</span>
+</div>
+<p class="text-white/70 text-xs md:text-sm leading-relaxed mb-3 md:mb-4">
+Professional home repairs, renovations, and remodeling across Ohio. Licensed, insured, and dedicated to quality workmanship.
+</p>
+<div class="space-y-1 md:space-y-2">
+<p class="text-white/70 text-xs md:text-sm">
+<i class="fa-solid fa-phone text-warm-orange mr-1 md:mr-2"></i>
+(937) 396-4018
+</p>
+<p class="text-white/70 text-xs md:text-sm break-all">
+<i class="fa-solid fa-envelope text-warm-orange mr-1 md:mr-2"></i>
+walnutandwilsonhomes@gmail.com
+</p>
+<p class="text-white/70 text-xs md:text-sm">
+<i class="fa-solid fa-location-dot text-warm-orange mr-1 md:mr-2"></i>
+Serving Dayton, Cincinnati & surrounding areas
+</p>
+</div>
+</div>
+<div>
+<h4 class="font-heading font-bold text-white text-base md:text-lg mb-3">Quick Links</h4>
+<ul class="space-y-1 md:space-y-2">
+<li><a href="#services" class="text-white/70 hover:text-warm-orange text-xs md:text-sm transition">Services</a></li>
+<li><a href="#gallery" class="text-white/70 hover:text-warm-orange text-xs md:text-sm transition">Gallery</a></li>
+<li><a href="#process" class="text-white/70 hover:text-warm-orange text-xs md:text-sm transition">Our Process</a></li>
+<li><a href="#contact" class="text-white/70 hover:text-warm-orange text-xs md:text-sm transition">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-heading font-bold text-white text-base md:text-lg mb-3">Services</h4>
+<ul class="space-y-1 md:space-y-2">
+<li><a href="#service-repairs" class="text-white/70 hover:text-warm-orange text-xs md:text-sm transition">Repairs</a></li>
+<li><a href="#licensed-trades" class="text-white/70 hover:text-warm-orange text-xs md:text-sm transition">Plumbing</a></li>
+<li><a href="#licensed-trades" class="text-white/70 hover:text-warm-orange text-xs md:text-sm transition">Electrical</a></li>
+<li><a href="#remodeling" class="text-white/70 hover:text-warm-orange text-xs md:text-sm transition">Remodeling</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-white/10 pt-4 md:pt-8">
+<div class="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
+<p class="text-white/50 text-xs md:text-sm">
+© 2026 Walnut & Wilson Homes LLC. All rights reserved.
+</p>
+<p class="text-white/50 text-xs md:text-sm">
+Licensed • Insured • Professional
+</p>
+</div>
+</div>
+</div>
+</footer>
+
+<!-- Image Modal -->
+<div class="image-modal">
+  <span class="modal-close">&times;</span>
+  <div class="image-modal-content">
+    <img class="modal-image" src="" alt="Enlarged project image">
+  </div>
+  <span class="modal-nav modal-prev">&larr;</span>
+  <span class="modal-nav modal-next">&rarr;</span>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('header');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    let lastScrollY = window.scrollY;
+
+    function updateHeaderVisibility() {
+        const currentY = window.scrollY;
+        if (currentY <= 10) {
+            header.classList.remove('header-hidden');
+        } else if (currentY > lastScrollY + 5) {
+            header.classList.add('header-hidden');
+        } else if (currentY < lastScrollY - 5) {
+            header.classList.remove('header-hidden');
+        }
+        lastScrollY = currentY;
+    }
+
+    window.addEventListener('scroll', updateHeaderVisibility, { passive: true });
+    updateHeaderVisibility();
+
+    if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('open');
+            mobileMenu.classList.toggle('open');
+            mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
+        });
+        mobileMenu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    
+    // Horizontal gallery navigation
+    const galleryNavButtons = document.querySelectorAll('.horizontal-gallery + .flex button');
+    galleryNavButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            const gallery = this.closest('.mb-12').querySelector('.horizontal-gallery');
+            const scrollAmount = gallery.offsetWidth * (index === 0 ? -1 : 1);
+            gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    });
+    
+    // Testimonials navigation
+    const testimonialNavButtons = document.querySelectorAll('.testimonials-container + .flex button');
+    testimonialNavButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            const container = this.closest('.max-w-7xl').querySelector('.testimonials-container');
+            const scrollAmount = container.offsetWidth * (index === 0 ? -1 : 1);
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    });
+    
+    // Image modal functionality
+    const modal = document.querySelector('.image-modal');
+    const modalImage = document.querySelector('.modal-image');
+    const closeBtn = document.querySelector('.modal-close');
+    const prevBtn = document.querySelector('.modal-prev');
+    const nextBtn = document.querySelector('.modal-next');
+    const galleryImages = document.querySelectorAll('.horizontal-gallery .project-image');
+    
+    let currentImageIndex = 0;
+    let allImages = [];
+    
+    // Collect all images from the horizontal gallery
+    galleryImages.forEach((img, index) => {
+        allImages.push({
+            src: img.src,
+            alt: img.alt
+        });
+        
+        // Add click event to each image
+        img.addEventListener('click', function(e) {
+            e.preventDefault();
+            currentImageIndex = index;
+            openModal();
+        });
+    });
+
+    
+    function openModal() {
+        modalImage.src = allImages[currentImageIndex].src;
+        modalImage.alt = allImages[currentImageIndex].alt;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    function showNextImage() {
+        currentImageIndex = (currentImageIndex + 1) % allImages.length;
+        openModal();
+    }
+    
+    function showPrevImage() {
+        currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+        openModal();
+    }
+    
+    // Event listeners
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    prevBtn.addEventListener('click', showPrevImage);
+    nextBtn.addEventListener('click', showNextImage);
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+        if (e.key === 'ArrowRight') {
+            showNextImage();
+        }
+        if (e.key === 'ArrowLeft') {
+            showPrevImage();
+        }
+    });
+    
+    // Prevent modal from closing when clicking on the image
+    modalImage.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+    
+    // Drag-and-drop upload + filename preview
+    const dropzone = document.getElementById('project-dropzone');
+    const fileInput = document.getElementById('project-photos');
+    const fileList = document.getElementById('file-list');
+    
+    function formatSize(bytes) {
+        if (!bytes && bytes !== 0) return '';
+        const units = ['B', 'KB', 'MB', 'GB'];
+        let size = bytes;
+        let i = 0;
+        while (size >= 1024 && i < units.length - 1) {
+            size /= 1024;
+            i += 1;
+        }
+        return `${size.toFixed(size >= 10 || i === 0 ? 0 : 1)} ${units[i]}`;
+    }
+    
+    function renderFileList(files) {
+        if (!fileList) return;
+        fileList.innerHTML = '';
+        if (!files || files.length === 0) return;
+        Array.from(files).forEach((file) => {
+            const li = document.createElement('li');
+            li.textContent = `${file.name}`;
+            const size = document.createElement('span');
+            size.textContent = formatSize(file.size);
+            li.appendChild(size);
+            fileList.appendChild(li);
+        });
+    }
+    
+    if (fileInput) {
+        fileInput.addEventListener('change', () => {
+            renderFileList(fileInput.files);
+        });
+    }
+    
+    if (dropzone && fileInput) {
+        ['dragenter', 'dragover'].forEach((evt) => {
+            dropzone.addEventListener(evt, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropzone.classList.add('dropzone-active');
+            });
+        });
+        ['dragleave', 'drop'].forEach((evt) => {
+            dropzone.addEventListener(evt, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dropzone.classList.remove('dropzone-active');
+            });
+        });
+        dropzone.addEventListener('drop', (e) => {
+            if (!e.dataTransfer || !e.dataTransfer.files) return;
+            fileInput.files = e.dataTransfer.files;
+            renderFileList(fileInput.files);
+        });
+    }
+    
+    // Make sure the modal is responsive on window resize
+    window.addEventListener('resize', function() {
+        if (modal.style.display === 'flex') {
+            openModal(); // Refresh modal to maintain proper sizing
+        }
+    });
+});
+</script>
+</body>
+</html>
