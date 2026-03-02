@@ -4,13 +4,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home</title>
+<title>Walnut & Wilson Homes LLC | Home Repairs & Renovations in Dayton & Cincinnati, OH</title>
+<meta name="description" content="Licensed & insured home repair and renovation services in Dayton, Cincinnati, and surrounding Ohio areas. Plumbing, electrical, remodeling, carpentry, and more. 20+ years experience. Call (937) 562-1235.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://walnutandwilsonhomes.com">
+<meta property="og:title" content="Walnut & Wilson Homes LLC | Home Repairs & Renovations">
+<meta property="og:description" content="Licensed & insured home repair and renovation services in Dayton, Cincinnati, and surrounding Ohio areas. From small fixes to full remodels.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://walnutandwilsonhomes.com">
+<meta property="og:image" content="https://walnutandwilsonhomes.com/images/logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Walnut & Wilson Homes LLC | Home Repairs & Renovations">
+<meta name="twitter:description" content="Licensed & insured home repair and renovation services in Dayton, Cincinnati, and surrounding Ohio areas.">
 <link rel="icon" type="image/png" href="images/logo.png">
 <script src="https://cdn.tailwindcss.com"></script>
-<script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://storage.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 ::-webkit-scrollbar { display: none;}
@@ -235,6 +245,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
   .grid-cols-1\.5 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+  body {
+    padding-bottom: 72px;
+  }
 }
 
 @media (min-width: 769px) {
@@ -248,6 +261,138 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
     width: 240px;
     height: 170px;
   }
+}
+
+.mobile-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #0F172A;
+  padding: 0.75rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+  z-index: 9998;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.mobile-cta-bar.visible {
+  transform: translateY(0);
+}
+@media (min-width: 768px) {
+  .mobile-cta-bar { display: none; }
+}
+.ba-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  aspect-ratio: 4/3;
+  cursor: col-resize;
+}
+.ba-slider img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ba-slider .ba-after {
+  clip-path: inset(0 0 0 50%);
+}
+.ba-slider input[type="range"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: col-resize;
+  z-index: 3;
+}
+.ba-slider .ba-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: white;
+  transform: translateX(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+.ba-slider .ba-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.ba-slider .ba-handle::before {
+  content: '\f0d9  \f0da';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #0F172A;
+  font-size: 14px;
+  z-index: 4;
+  pointer-events: none;
+  letter-spacing: 8px;
+}
+.ba-label {
+  position: absolute;
+  bottom: 12px;
+  padding: 4px 12px;
+  background: rgba(15,23,42,0.75);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ba-label-before { left: 12px; }
+.ba-label-after { right: 12px; }
+.faq-item {
+  border-bottom: 1px solid rgba(51,65,85,0.15);
+}
+.faq-question {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 0;
+  transition: color 0.2s ease;
+}
+.faq-question:hover {
+  color: #F97316;
+}
+.faq-question i {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+.faq-item.open .faq-question i {
+  transform: rotate(180deg);
+}
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.faq-item.open .faq-answer {
+  max-height: 300px;
+  padding-bottom: 1.25rem;
 }
 </style>
 <script>
@@ -269,8 +414,52 @@ fontFamily: {
 }
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "Walnut & Wilson Homes LLC",
+  "url": "https://walnutandwilsonhomes.com",
+  "telephone": "+1-937-562-1235",
+  "email": "walnutandwilsonhomes@gmail.com",
+  "image": "https://walnutandwilsonhomes.com/images/logo.png",
+  "description": "Licensed & insured home repair and renovation services in Dayton, Cincinnati, and surrounding Ohio areas.",
+  "areaServed": [
+    { "@type": "City", "name": "Dayton", "addressRegion": "OH" },
+    { "@type": "City", "name": "Cincinnati", "addressRegion": "OH" }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Home Services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Repairs & Maintenance" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plumbing" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electrical" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Remodeling" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Carpentry" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Painting" } }
+    ]
+  },
+  "priceRange": "$$"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How do I get a quote?", "acceptedAnswer": {"@type": "Answer", "text": "Fill out our quote request form, call or text us at (937) 562-1235, or email walnutandwilsonhomes@gmail.com. We respond within 1 business day with a free estimate."}},
+    {"@type": "Question", "name": "What areas do you serve?", "acceptedAnswer": {"@type": "Answer", "text": "We provide full service in the Dayton and Cincinnati metro areas, including surrounding communities."}},
+    {"@type": "Question", "name": "Are you licensed and insured?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We are fully licensed and insured, with specific trade licenses for plumbing, electrical, and gas work."}},
+    {"@type": "Question", "name": "How long does a typical project take?", "acceptedAnswer": {"@type": "Answer", "text": "Small repairs can often be done in a day, while full remodels typically take 2-6 weeks."}},
+    {"@type": "Question", "name": "Do you handle permits and inspections?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. For projects that require permits, we handle the entire process including pulling permits and scheduling inspections."}},
+    {"@type": "Question", "name": "Can I see examples of your work?", "acceptedAnswer": {"@type": "Answer", "text": "Check out our project gallery to see recent work including basement transformations, kitchen remodels, bathroom rebuilds, and more."}}
+  ]
+}
+</script>
 </head>
 <body class="bg-off-white">
+<a href="#hero" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[99999] focus:bg-warm-orange focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">Skip to main content</a>
 <header id="header" class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
 <div class="max-w-screen-2xl mx-auto px-3 md:px-6 lg:px-10 py-2 md:py-3 flex items-center justify-between gap-2 md:gap-0 relative">
 <div class="flex items-center md:space-x-3">
@@ -293,6 +482,7 @@ Get Quote
 <a href="#gallery" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Gallery</a>
 <a href="#services" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Services</a>
 <a href="#licensed-trades" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Licensed</a>
+<a href="#faq" class="text-navy-charcoal hover:text-warm-orange font-medium transition">FAQ</a>
 <a href="#contact" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Contact</a>
 </nav>
 <div class="hidden lg:flex items-center text-navy-charcoal hover:text-warm-orange font-semibold">
@@ -306,13 +496,15 @@ Get Quote
 <a href="#gallery" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Gallery</a>
 <a href="#services" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Services</a>
 <a href="#licensed-trades" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Licensed</a>
+<a href="#faq" class="text-navy-charcoal hover:text-warm-orange font-medium transition">FAQ</a>
 <a href="#contact" class="text-navy-charcoal hover:text-warm-orange font-medium transition">Contact</a>
 </nav>
 </div>
 </header>
+<main>
 <section id="hero" class="relative pt-16 min-h-[700px] overflow-hidden">
 <div class="absolute inset-0">
-<img class="w-full h-full object-cover opacity-15" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7d2f0bec7e-58e5be3d9cab3f787f79.png" alt="modern home renovation interior construction site with tools and materials, grayscale muted tones, professional contractor workspace" />
+<img class="w-full h-full object-cover opacity-15" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7d2f0bec7e-58e5be3d9cab3f787f79.png" alt="modern home renovation interior construction site with tools and materials, grayscale muted tones, professional contractor workspace" fetchpriority="high" />
 </div>
 <div class="relative z-10 max-w-7xl mx-auto px-8 h-full flex items-center">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
@@ -461,7 +653,7 @@ Lead manager with 20+ years residential & commercial experience
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-12">
 <div class="gallery-image overflow-hidden rounded-xl shadow-lg">
-<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3fc4e03cc7-b6828707fa26e3fc20c4.png" alt="modern finished basement renovation with comfortable seating area" />
+<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" loading="lazy" decoding="async" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3fc4e03cc7-b6828707fa26e3fc20c4.png" alt="modern finished basement renovation with comfortable seating area" />
 <div class="gallery-overlay">
 <h3 class="font-heading font-bold text-white text-xl mb-1">Basement Transformation</h3>
 <p class="text-warm-orange font-semibold">Dayton, OH</p>
@@ -469,7 +661,7 @@ Lead manager with 20+ years residential & commercial experience
 </div>
 </div>
 <div class="gallery-image overflow-hidden rounded-xl shadow-lg">
-<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/5b398f0fa3-fa512b00ceac18e519e4.png" alt="renovated modern kitchen with new cabinets and countertops" />
+<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" loading="lazy" decoding="async" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/5b398f0fa3-fa512b00ceac18e519e4.png" alt="renovated modern kitchen with new cabinets and countertops" />
 <div class="gallery-overlay">
 <h3 class="font-heading font-bold text-white text-xl mb-1">Kitchen Remodel</h3>
 <p class="text-warm-orange font-semibold">Columbus, OH</p>
@@ -477,7 +669,7 @@ Lead manager with 20+ years residential & commercial experience
 </div>
 </div>
 <div class="gallery-image overflow-hidden rounded-xl shadow-lg">
-<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/36b4cb8346-12fcbbff64b47a6bf071.png" alt="renovated bathroom with new tile shower and modern fixtures" />
+<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" loading="lazy" decoding="async" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/36b4cb8346-12fcbbff64b47a6bf071.png" alt="renovated bathroom with new tile shower and modern fixtures" />
 <div class="gallery-overlay">
 <h3 class="font-heading font-bold text-white text-xl mb-1">Bathroom Rebuild</h3>
 <p class="text-warm-orange font-semibold">Cincinnati, OH</p>
@@ -485,7 +677,7 @@ Lead manager with 20+ years residential & commercial experience
 </div>
 </div>
 <div class="gallery-image overflow-hidden rounded-xl shadow-lg">
-<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" src="images/trim-work.jpg" alt="custom trim and moulding installation in a renovated home" />
+<img class="w-full h-48 md:h-64 object-cover transition-transform duration-300" loading="lazy" decoding="async" src="images/trim-work.jpg" alt="custom trim and moulding installation in a renovated home" />
 <div class="gallery-overlay">
 <h3 class="font-heading font-bold text-white text-xl mb-1">Quality Trim Work</h3>
 <p class="text-warm-orange font-semibold">Springfield, OH</p>
@@ -494,211 +686,250 @@ Lead manager with 20+ years residential & commercial experience
 </div>
 </div>
 <div class="mb-12">
+<h3 class="font-heading font-bold text-navy-charcoal text-xl md:text-2xl text-center mb-4 md:mb-6">Before &amp; After</h3>
+<div class="w-12 h-1 bg-warm-orange mx-auto mb-8 rounded-full"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+<div>
+  <div class="ba-slider shadow-lg">
+    <img src="website photos/IMG-20260116-WA0001.jpg" alt="Before renovation" class="ba-before">
+    <img src="website photos/IMG-20260116-WA0002.jpg" alt="After renovation" class="ba-after">
+    <div class="ba-handle"></div>
+    <span class="ba-label ba-label-before">Before</span>
+    <span class="ba-label ba-label-after">After</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Before and after comparison slider">
+  </div>
+  <p class="text-center font-heading font-bold text-navy-charcoal mt-3">Basement Renovation</p>
+</div>
+<div>
+  <div class="ba-slider shadow-lg">
+    <img src="website photos/IMG-20260116-WA0003.jpg" alt="Before renovation" class="ba-before">
+    <img src="website photos/IMG-20260116-WA0004.jpg" alt="After renovation" class="ba-after">
+    <div class="ba-handle"></div>
+    <span class="ba-label ba-label-before">Before</span>
+    <span class="ba-label ba-label-after">After</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Before and after comparison slider">
+  </div>
+  <p class="text-center font-heading font-bold text-navy-charcoal mt-3">Kitchen Remodel</p>
+</div>
+<div>
+  <div class="ba-slider shadow-lg">
+    <img src="website photos/IMG-20260116-WA0006.jpg" alt="Before renovation" class="ba-before">
+    <img src="website photos/IMG-20260116-WA0007.jpg" alt="After renovation" class="ba-after">
+    <div class="ba-handle"></div>
+    <span class="ba-label ba-label-before">Before</span>
+    <span class="ba-label ba-label-after">After</span>
+    <input type="range" min="0" max="100" value="50" aria-label="Before and after comparison slider">
+  </div>
+  <p class="text-center font-heading font-bold text-navy-charcoal mt-3">Bathroom Update</p>
+</div>
+</div>
+</div>
+<div class="mb-12">
 <h3 class="font-heading font-bold text-navy-charcoal text-xl md:text-2xl text-center mb-4 md:mb-6">More Projects</h3>
 <div class="horizontal-gallery px-4">
 <!-- New images for horizontal gallery -->
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0001.jpg" alt="Project photo 1" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0001.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0002.jpg" alt="Project photo 2" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0002.jpg" alt="Interior remodel completed by Walnut & Wilson Homes" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0003.jpg" alt="Project photo 3" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0003.jpg" alt="Bathroom renovation with modern fixtures" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0004.jpg" alt="Project photo 4" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0004.jpg" alt="Kitchen upgrade and cabinet installation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0006.jpg" alt="Project photo 5" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0006.jpg" alt="Residential repair and improvement work" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0007.jpg" alt="Project photo 6" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0007.jpg" alt="Professional home improvement project" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0008.jpg" alt="Project photo 7" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0008.jpg" alt="Room transformation and renovation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0009.jpg" alt="Project photo 8" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0009.jpg" alt="Quality finish work and detailing" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0010.jpg" alt="Project photo 9" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0010.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0012.jpg" alt="Project photo 10" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0012.jpg" alt="Interior remodel completed by Walnut & Wilson Homes" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0013.jpg" alt="Project photo 11" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0013.jpg" alt="Bathroom renovation with modern fixtures" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0015.jpg" alt="Project photo 12" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0015.jpg" alt="Kitchen upgrade and cabinet installation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0017.jpg" alt="Project photo 13" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0017.jpg" alt="Residential repair and improvement work" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0018.jpg" alt="Project photo 14" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0018.jpg" alt="Professional home improvement project" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0019.jpg" alt="Project photo 15" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0019.jpg" alt="Room transformation and renovation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0020.jpg" alt="Project photo 16" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0020.jpg" alt="Quality finish work and detailing" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0022.jpg" alt="Project photo 17" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0022.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0023.jpg" alt="Project photo 18" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0023.jpg" alt="Interior remodel completed by Walnut & Wilson Homes" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0024.jpg" alt="Project photo 19" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0024.jpg" alt="Bathroom renovation with modern fixtures" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0025.jpg" alt="Project photo 20" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0025.jpg" alt="Kitchen upgrade and cabinet installation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0026.jpg" alt="Project photo 21" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0026.jpg" alt="Residential repair and improvement work" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0027.jpg" alt="Project photo 22" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0027.jpg" alt="Professional home improvement project" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0029.jpg" alt="Project photo 23" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0029.jpg" alt="Room transformation and renovation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0030.jpg" alt="Project photo 24" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0030.jpg" alt="Quality finish work and detailing" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0031.jpg" alt="Project photo 25" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0031.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0032.jpg" alt="Project photo 26" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0032.jpg" alt="Interior remodel completed by Walnut & Wilson Homes" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0034.jpg" alt="Project photo 27" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0034.jpg" alt="Bathroom renovation with modern fixtures" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0035.jpg" alt="Project photo 28" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0035.jpg" alt="Kitchen upgrade and cabinet installation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0036.jpg" alt="Project photo 29" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0036.jpg" alt="Residential repair and improvement work" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0037.jpg" alt="Project photo 30" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0037.jpg" alt="Professional home improvement project" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0038.jpg" alt="Project photo 31" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0038.jpg" alt="Room transformation and renovation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0039.jpg" alt="Project photo 32" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0039.jpg" alt="Quality finish work and detailing" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0041.jpg" alt="Project photo 33" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0041.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0042.jpg" alt="Project photo 34" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0042.jpg" alt="Interior remodel completed by Walnut & Wilson Homes" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0044.jpg" alt="Project photo 35" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0044.jpg" alt="Bathroom renovation with modern fixtures" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0046.jpg" alt="Project photo 36" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0046.jpg" alt="Kitchen upgrade and cabinet installation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0048.jpg" alt="Project photo 37" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0048.jpg" alt="Residential repair and improvement work" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0050.jpg" alt="Project photo 38" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0050.jpg" alt="Professional home improvement project" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0051.jpg" alt="Project photo 39" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0051.jpg" alt="Room transformation and renovation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0052.jpg" alt="Project photo 40" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0052.jpg" alt="Quality finish work and detailing" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0054.jpg" alt="Project photo 41" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0054.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0055.jpg" alt="Project photo 42" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0055.jpg" alt="Interior remodel completed by Walnut & Wilson Homes" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0056.jpg" alt="Project photo 43" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0056.jpg" alt="Bathroom renovation with modern fixtures" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0057.jpg" alt="Project photo 44" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0057.jpg" alt="Kitchen upgrade and cabinet installation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0058.jpg" alt="Project photo 45" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0058.jpg" alt="Residential repair and improvement work" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0060.jpg" alt="Project photo 46" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0060.jpg" alt="Professional home improvement project" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0061.jpg" alt="Project photo 47" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0061.jpg" alt="Room transformation and renovation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0063.jpg" alt="Project photo 48" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0063.jpg" alt="Quality finish work and detailing" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0064.jpg" alt="Project photo 49" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0064.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0065.jpg" alt="Project photo 50" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0065.jpg" alt="Interior remodel completed by Walnut & Wilson Homes" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0066.jpg" alt="Project photo 51" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0066.jpg" alt="Bathroom renovation with modern fixtures" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0068.jpg" alt="Project photo 52" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0068.jpg" alt="Kitchen upgrade and cabinet installation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0069.jpg" alt="Project photo 53" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0069.jpg" alt="Residential repair and improvement work" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0070.jpg" alt="Project photo 54" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0070.jpg" alt="Professional home improvement project" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0072.jpg" alt="Project photo 55" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0072.jpg" alt="Room transformation and renovation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0073.jpg" alt="Project photo 56" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0073.jpg" alt="Quality finish work and detailing" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0074.jpg" alt="Project photo 57" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0074.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0075.jpg" alt="Project photo 58" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0075.jpg" alt="Interior remodel completed by Walnut & Wilson Homes" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0076.jpg" alt="Project photo 59" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0076.jpg" alt="Bathroom renovation with modern fixtures" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0077.jpg" alt="Project photo 60" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0077.jpg" alt="Kitchen upgrade and cabinet installation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0079.jpg" alt="Project photo 61" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0079.jpg" alt="Residential repair and improvement work" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0080.jpg" alt="Project photo 62" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0080.jpg" alt="Professional home improvement project" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0082.jpg" alt="Project photo 63" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0082.jpg" alt="Room transformation and renovation" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0084.jpg" alt="Project photo 64" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0084.jpg" alt="Quality finish work and detailing" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
   <div class="flex-shrink-0 project-item">
-    <img src="website photos/IMG-20260116-WA0085.jpg" alt="Project photo 65" class="project-thumb project-image">
+    <img src="website photos/IMG-20260116-WA0085.jpg" alt="Home renovation project showcasing quality craftsmanship" class="project-thumb project-image" loading="lazy" decoding="async">
   </div>
 
 </div>
 <div class="flex justify-center space-x-4 mt-4">
-<button class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
+<button aria-label="Scroll gallery left" class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
 <i class="fa-solid fa-arrow-left"></i>
 </button>
-<button class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
+<button aria-label="Scroll gallery right" class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
 <i class="fa-solid fa-arrow-right"></i>
 </button>
 </div>
@@ -1226,7 +1457,7 @@ Final inspection to ensure you're completely satisfied.
 <div class="testimonials-container">
 <div class="testimonial-card">
 <div class="flex items-center space-x-3 md:space-x-4 mb-3 md:mb-4">
-<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover">
+<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover" loading="lazy" decoding="async">
 <div>
 <h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg">Sarah M.</h4>
 <p class="text-slate-med text-xs md:text-sm">Dayton, OH</p>
@@ -1245,7 +1476,7 @@ Final inspection to ensure you're completely satisfied.
 </div>
 <div class="testimonial-card">
 <div class="flex items-center space-x-3 md:space-x-4 mb-3 md:mb-4">
-<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover">
+<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover" loading="lazy" decoding="async">
 <div>
 <h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg">Mike R.</h4>
 <p class="text-slate-med text-xs md:text-sm">Cincinnati, OH</p>
@@ -1264,7 +1495,7 @@ Final inspection to ensure you're completely satisfied.
 </div>
 <div class="testimonial-card">
 <div class="flex items-center space-x-3 md:space-x-4 mb-3 md:mb-4">
-<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover">
+<img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" alt="Client" class="w-14 h-14 md:w-16 h-16 rounded-full object-cover" loading="lazy" decoding="async">
 <div>
 <h4 class="font-heading font-bold text-navy-charcoal text-base md:text-lg">Jennifer L.</h4>
 <p class="text-slate-med text-xs md:text-sm">Columbus, OH</p>
@@ -1297,12 +1528,84 @@ Final inspection to ensure you're completely satisfied.
 </div>
 </div>
 <div class="flex justify-center space-x-4 mt-6 md:mt-8">
-<button class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
+<button aria-label="Scroll gallery left" class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
 <i class="fa-solid fa-arrow-left"></i>
 </button>
-<button class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
+<button aria-label="Scroll gallery right" class="bg-navy-charcoal text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-800 transition">
 <i class="fa-solid fa-arrow-right"></i>
 </button>
+</div>
+</div>
+</section>
+<section id="faq" class="bg-white py-16 md:py-20">
+<div class="max-w-3xl mx-auto px-8">
+<div class="text-center mb-10 md:mb-12">
+<h2 class="font-heading font-bold text-navy-charcoal text-3xl md:text-4xl mb-4">Frequently Asked Questions</h2>
+<div class="w-24 h-1.5 bg-warm-orange mx-auto mb-4"></div>
+<p class="text-slate-med text-base md:text-lg">Answers to common questions about our services</p>
+</div>
+<div class="space-y-0">
+
+<div class="faq-item">
+<div class="faq-question text-navy-charcoal font-heading font-bold text-base md:text-lg">
+How do I get a quote?
+<i class="fa-solid fa-chevron-down text-warm-orange"></i>
+</div>
+<div class="faq-answer text-slate-med text-sm md:text-base leading-relaxed">
+Fill out our quote request form below, call or text us at (937) 562-1235, or email walnutandwilsonhomes@gmail.com. We respond within 1 business day with a free estimate.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question text-navy-charcoal font-heading font-bold text-base md:text-lg">
+What areas do you serve?
+<i class="fa-solid fa-chevron-down text-warm-orange"></i>
+</div>
+<div class="faq-answer text-slate-med text-sm md:text-base leading-relaxed">
+We provide full service in the Dayton and Cincinnati metro areas, including surrounding communities. Contact us if you're outside these areas — we may still be able to help.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question text-navy-charcoal font-heading font-bold text-base md:text-lg">
+Are you licensed and insured?
+<i class="fa-solid fa-chevron-down text-warm-orange"></i>
+</div>
+<div class="faq-answer text-slate-med text-sm md:text-base leading-relaxed">
+Yes. We are fully licensed and insured, with specific trade licenses for plumbing, electrical, and gas work. Our lead manager has 20+ years of residential and commercial experience.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question text-navy-charcoal font-heading font-bold text-base md:text-lg">
+How long does a typical project take?
+<i class="fa-solid fa-chevron-down text-warm-orange"></i>
+</div>
+<div class="faq-answer text-slate-med text-sm md:text-base leading-relaxed">
+It depends on scope. Small repairs can often be done in a day, while full remodels (kitchens, bathrooms, basements) typically take 2–6 weeks. We'll give you a clear timeline before work begins.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question text-navy-charcoal font-heading font-bold text-base md:text-lg">
+Do you handle permits and inspections?
+<i class="fa-solid fa-chevron-down text-warm-orange"></i>
+</div>
+<div class="faq-answer text-slate-med text-sm md:text-base leading-relaxed">
+Yes. For projects that require permits, we handle the entire process including pulling permits and scheduling inspections. We also specialize in pre- and post-inspection repairs.
+</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-question text-navy-charcoal font-heading font-bold text-base md:text-lg">
+Can I see examples of your work?
+<i class="fa-solid fa-chevron-down text-warm-orange"></i>
+</div>
+<div class="faq-answer text-slate-med text-sm md:text-base leading-relaxed">
+Absolutely! Check out our <a href="#gallery" class="text-warm-orange font-semibold hover:underline">project gallery</a> to see recent work including basement transformations, kitchen remodels, bathroom rebuilds, and more.
+</div>
+</div>
+
 </div>
 </div>
 </section>
@@ -1350,25 +1653,25 @@ Final inspection to ensure you're completely satisfied.
 <input type="hidden" name="_template" value="table">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
 <div>
-<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Name *</label>
-<input type="text" name="name" placeholder="Your full name" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+<label for="quote-name" class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Name *</label>
+<input id="quote-name" type="text" name="name" placeholder="Your full name" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
 </div>
 <div>
-<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Phone *</label>
-<input type="tel" name="phone" placeholder="(555) 555-5555" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+<label for="quote-phone" class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Phone *</label>
+<input id="quote-phone" type="tel" name="phone" placeholder="(555) 555-5555" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
 </div>
 </div>
 <div>
-<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Email *</label>
-<input type="email" name="email" placeholder="your@email.com" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+<label for="quote-email" class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Email *</label>
+<input id="quote-email" type="email" name="email" placeholder="your@email.com" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
 </div>
 <div>
-<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">City / Zip Code *</label>
-<input type="text" name="location" placeholder="e.g., Dayton, OH 45402" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+<label for="quote-location" class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">City / Zip Code *</label>
+<input id="quote-location" type="text" name="location" placeholder="e.g., Dayton, OH 45402" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
 </div>
 <div>
-<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Project Type *</label>
-<select name="project-type" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+<label for="quote-project-type" class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Project Type *</label>
+<select id="quote-project-type" name="project-type" required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
 <option value="">Select project type</option>
 <option>Repair / Small Job</option>
 <option>Plumbing</option>
@@ -1384,8 +1687,8 @@ Final inspection to ensure you're completely satisfied.
 </select>
 </div>
 <div>
-<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Project Description *</label>
-<textarea name="project-description" rows="3" placeholder="Tell us about your project..." required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange resize-none transition text-xs md:text-sm"></textarea>
+<label for="quote-project-description" class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Project Description *</label>
+<textarea id="quote-project-description" name="project-description" rows="3" placeholder="Tell us about your project..." required class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange resize-none transition text-xs md:text-sm"></textarea>
 </div>
 <div>
 <label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Upload Photos (Optional)</label>
@@ -1398,8 +1701,8 @@ Final inspection to ensure you're completely satisfied.
 <ul id="file-list" class="file-list"></ul>
 </div>
 <div>
-<label class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Preferred Timeline</label>
-<select name="timeline" class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
+<label for="quote-timeline" class="block text-xs md:text-sm font-bold text-navy-charcoal mb-1">Preferred Timeline</label>
+<select id="quote-timeline" name="timeline" class="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg border border-slate-med/30 focus:outline-none focus:border-warm-orange transition text-xs md:text-sm">
 <option value="">Select timeline</option>
 <option>As soon as possible</option>
 <option>Within 2 weeks</option>
@@ -1449,6 +1752,7 @@ We'll respond within 1 business day
 </div>
 </div>
 </section>
+</main>
 <footer id="footer" class="bg-navy-charcoal py-8 md:py-12">
 <div class="max-w-7xl mx-auto px-8">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-8 mb-6 md:mb-8">
@@ -1508,7 +1812,7 @@ Licensed • Insured • Professional
 </footer>
 
 <!-- Image Modal -->
-<div class="image-modal">
+<div class="image-modal" role="dialog" aria-modal="true" aria-label="Image gallery viewer">
   <span class="modal-close">&times;</span>
   <div class="image-modal-content">
     <img class="modal-image" src="" alt="Enlarged project image">
@@ -1725,7 +2029,52 @@ document.addEventListener('DOMContentLoaded', function() {
             openModal(); // Refresh modal to maintain proper sizing
         }
     });
+
+    // Before/After sliders
+    document.querySelectorAll('.ba-slider input[type="range"]').forEach(slider => {
+      slider.addEventListener('input', function() {
+        const val = this.value + '%';
+        const afterImg = this.parentElement.querySelector('.ba-after');
+        const handle = this.parentElement.querySelector('.ba-handle');
+        afterImg.style.clipPath = 'inset(0 0 0 ' + val + ')';
+        handle.style.left = val;
+      });
+    });
+
+    // Sticky mobile CTA bar
+    const mobileCta = document.getElementById('mobile-cta-bar');
+    const contactSection = document.getElementById('contact');
+    if (mobileCta && contactSection) {
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const contactTop = contactSection.offsetTop;
+        const windowHeight = window.innerHeight;
+        if (scrollY > 600 && scrollY + windowHeight < contactTop + 200) {
+          mobileCta.classList.add('visible');
+        } else {
+          mobileCta.classList.remove('visible');
+        }
+      }, { passive: true });
+    }
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
 });
 </script>
+<div id="mobile-cta-bar" class="mobile-cta-bar md:hidden">
+  <a href="tel:9375621235" class="flex-1 flex items-center justify-center gap-2 bg-navy-charcoal border-2 border-warm-orange text-white font-bold py-3 rounded-lg text-sm hover:bg-slate-800 transition">
+    <i class="fa-solid fa-phone"></i> Call Now
+  </a>
+  <a href="#contact" class="flex-1 flex items-center justify-center gap-2 bg-warm-orange text-white font-bold py-3 rounded-lg text-sm hover:bg-orange-600 transition">
+    <i class="fa-solid fa-file-lines"></i> Get Quote
+  </a>
+</div>
 </body>
 </html>
